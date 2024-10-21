@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import fastcrm.customer.CustomerRepository;
 import fastcrm.email.EmailRepository;
 import fastcrm.email.EmailService;
@@ -23,21 +25,22 @@ public class HomeController {
     @Autowired
     private EmailService emailService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String home(Model model) {
         model.addAttribute("customers", customerRepository.findAll());
         model.addAttribute("emails", emailRepository.findAll());
         return "home";
     }
 
-    @PostMapping("/send-email")
-    public String sendEmail(@RequestParam("emailId") Long emailId) {
-        try {
-			emailService.sendHtmlEmail(emailId);
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        return "redirect:/?success";
-    }
+	@PostMapping("/send-email")
+	public String sendEmail(@RequestParam("emailId") Long emailId, RedirectAttributes redirectAttributes) {
+	    try {
+	        emailService.sendHtmlEmail(emailId);
+	        redirectAttributes.addFlashAttribute("message", "Email sent successfully!");
+	    } catch (MessagingException e) {
+	        e.printStackTrace();
+	        redirectAttributes.addFlashAttribute("error", "Failed to send email.");
+	    }
+	    return "redirect:/";
+	}
 }

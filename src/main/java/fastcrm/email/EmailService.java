@@ -5,12 +5,7 @@ import java.util.Optional;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import fastcrm.customer.Customer;
 import fastcrm.customer.CustomerRepository;
@@ -36,8 +31,16 @@ public class EmailService {
 		return emailRepository.findAll();
 	}
 	
-	public void create(@RequestBody Email email) {
+	public void create(Email email) {
 		emailRepository.save(email);
+	}
+	
+	public Optional<Email> findById(Long id) {
+		return emailRepository.findById(id);
+	}
+	
+	public void delete(Email email) {
+		emailRepository.delete(email);
 	}
 	
     public void sendHtmlEmail(Long idEmail) throws MessagingException {
