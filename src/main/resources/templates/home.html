@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCRM - Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div th:replace="~{navbar :: navbar}"></div>
+
+	<div class="container mt-4">
+	    <div class="jumbotron">
+	        <h1 class="display-4">Welcome to FastCRM!</h1>
+	        <p class="lead">Manage your customers and email campaigns with ease.</p>
+			<p>Use the navigation below to view or manage customers and emails.</p>
+			<a class="btn btn-primary btn-lg" href="/customer" role="button">View Customers</a>
+			<a class="btn btn-success btn-lg" href="/email" role="button">Manage Emails</a>
+	        <hr class="my-4">
+	        <p>Use the form below to send an email to a customer.</p>
+	    </div>
+
+	    <!-- Form to send email -->
+	    <div class="card">
+	        <div class="card-body">
+	            <h5 class="card-title">Send Email</h5>
+	            <form action="/send-email" method="POST">
+	                <div class="form-group">
+	                    <label for="emailTemplate">Select Email Template</label>
+	                    <select id="emailTemplate" name="emailId" class="form-control" required>
+	                        <option value="" disabled selected>Choose an email template</option>
+	                        <option th:each="email : ${emails}" th:value="${email.id}" th:text="${email.subject}"></option>
+	                    </select>
+	                </div>
+	                <button type="submit" class="btn btn-primary">Send Email</button>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

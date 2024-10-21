@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Email</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div th:replace="~{navbar :: navbar}"></div>
+	
+    <div class="container mt-4">
+        <h1>Edit Email</h1>
+        <form th:action="@{/email/edit}" th:object="${email}" method="post">
+            
+            <!-- Hidden field for the email ID -->
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" th:field="*{subject}" class="form-control" id="subject" placeholder="Enter email subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="body">Body</label>
+                <textarea th:field="*{body}" class="form-control" id="body" rows="10" placeholder="Enter email body" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/email" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

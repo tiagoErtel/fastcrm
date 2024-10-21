@@ -1,0 +1,23 @@
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">FastCRM</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/customer">Customers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/email">Emails</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <span class="navbar-text">
+                    Logged in as <b th:text="Usuario"></b>
+                </span>
+            </li>
+            <li class="nav-item">
+                <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="User Avatar" class="rounded-circle" width="40" height="40">
+            </li>
+        </ul>
+    </div>
+</nav>
